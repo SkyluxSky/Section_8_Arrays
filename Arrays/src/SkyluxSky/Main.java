@@ -52,8 +52,11 @@ public class Main {
         printArray(myIntegers);
         System.out.println("The average is " + getAverage(myIntegers));
 
+
+
     }
 
+    //Returns array of int of a specified size.
     public static int[] getIntegers(int number){
         System.out.println("Enter " +  number + " Integer values.\r");
         int[] values = new int[number];
@@ -65,18 +68,20 @@ public class Main {
         return values;
     }
 
-    //Gets the average of an array
+    //Gets the average of an array.
     public static double getAverage(int[] array){
 
         int sum = 0;
         for (int i = 0; i < array.length; i++){
             sum += array[i];
         }
-        
+
+        //Example of casting to type double.
         return (double) sum / (double) array.length;
     }
 
 
+    //Prints array - Display's the importance of iterative statements with the use of arrays.
     public static void printArray(int[] array){
         //Method tells for loop the size of the array (No hard numbers needed)
         for (int i = 0; i < array.length; i++){
