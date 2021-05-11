@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Enter Count: ");
         int count = scanner.nextInt();
-        scanner.nextInt();//functions as reading the enter key.
+        scanner.nextLine();//functions as reading the enter key.
 
         //Stores created array
         int[] returnedArray = readIntegers(count);
@@ -30,7 +30,7 @@ public class Main {
         for (int i = 0; i < array.length; i++){
             System.out.println("Enter a Number: ");
             int number = scanner.nextInt();
-            scanner.nextInt();
+            scanner.nextLine();
             array[i] = number;
         }
         return array;
