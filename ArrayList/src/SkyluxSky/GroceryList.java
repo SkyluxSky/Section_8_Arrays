@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class GroceryList {
     //Traditional arrays must be defined by datatype.
-    private int[] myNumbers = new int[50];
+    //private int[] myNumbers = new int[50];
+
     //Array list is a class - Can have its own constructor
     private ArrayList<String> groceryList = new ArrayList<String>();
 
@@ -33,6 +34,20 @@ public class GroceryList {
     public void removeGroceryItem(int position){
         String theItem = groceryList.get(position);
         groceryList.remove(position);
+    }
 
+    //Search items
+    public String findItem(String searchItem){
+        //contains functionality to search list if the arraylist contains the item
+        //boolean exists = groceryList.contains(searchItem);
+
+        //returns index position of searched item.
+        int position = groceryList.indexOf(searchItem);
+
+        if (position >= 0){
+            return groceryList.get(position);
+        }
+
+        return null;
     }
 }
