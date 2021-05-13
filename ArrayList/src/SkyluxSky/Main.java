@@ -4,6 +4,7 @@ package SkyluxSky;
 //ArrayList is a resizable array.
 //As s elements are added to an arraylist, the amount of memory required is updated automatically.
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -41,6 +42,9 @@ private static GroceryList groceryList = new GroceryList();
                     searchForItem();
                     break;
                 case 6:
+                    processArrayList();
+                    break;
+                case 7:
                     quit = true;
                     break;
             }
@@ -66,32 +70,48 @@ private static GroceryList groceryList = new GroceryList();
     }
 
     public static void modifyItem(){
-        System.out.println("Enter item number: ");
-        int itemNo = scanner.nextInt();
-        scanner.nextLine();
+        System.out.println("Current item name: ");
+        String itemNo = scanner.nextLine();
+        //scanner.nextLine();
 
         System.out.println("Enter replacement item: ");
         String newItem = scanner.nextLine();
         //(itemNo - 1) exists to offset list to a machine readable state (Arrays start at zero, lists start at 1 in the real world)
-        groceryList.modifyGroceryItem(itemNo - 1, newItem);
+        groceryList.modifyGroceryItem(itemNo, newItem);
     }
 
     public static void removeItem(){
-        System.out.println("Enter item number: ");
-        int itemNo = scanner.nextInt();
-        scanner.nextLine();
-        groceryList.removeGroceryItem(itemNo-1);
+        System.out.println("Enter item name: ");
+        String itemName = scanner.nextLine();
+        //scanner.nextLine();
+        groceryList.removeGroceryItem(itemName);
     }
 
     public static void searchForItem(){
         System.out.println("Item to search for: ");
         String  searchItem = scanner.nextLine();
 
-        if (groceryList.findItem(searchItem) != null){
+        if (groceryList.onFile(searchItem)){
             System.out.println("Found " + searchItem + " in our grocery list");
         } else {
             System.out.println(searchItem + " is not in the shopping list");
         }
+
+    }
+
+    //adds original list to a new ArrayList.
+    public static void processArrayList(){
+        //method 1
+        ArrayList<String> newArray = new ArrayList<String>();
+        newArray.addAll(groceryList.getGroceryList());
+
+        //method 2
+        ArrayList<String> nextArray = new ArrayList<String>(groceryList.getGroceryList());
+
+        //method 3 - convert arraylist to array.
+        String[] myArray = new String[groceryList.getGroceryList().size()];
+        //Returns array list of strings and passes it to the new array.
+        myArray = groceryList.getGroceryList().toArray(myArray);
 
     }
 
