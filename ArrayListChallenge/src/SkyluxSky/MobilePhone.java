@@ -23,8 +23,14 @@ public class MobilePhone {
 
     public boolean updateContact(Contact oldContact,Contact newContact){
         int foundPosition = findContact(oldContact);
+
         if (foundPosition < 0){
             System.out.println(oldContact.getName() + ", was not found");
+            return false;
+            //Checks for duplicate Names.
+        } else if (findContact(newContact.getName()) != -1){
+            System.out.println("Contact with name " + newContact.getName() +
+                    " already exists. Update was not successful");
             return false;
         }
 
