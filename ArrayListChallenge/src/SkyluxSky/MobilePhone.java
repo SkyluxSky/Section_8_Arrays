@@ -33,6 +33,19 @@ public class MobilePhone {
         return true;
     }
 
+    public boolean removeContact(Contact contact){
+        //Checks to see if contact is found.
+        int foundPosition = findContact(contact);
+        if (foundPosition < 0){
+            System.out.println(contact.getName() + ", was not found");
+            return false;
+        }
+        //deletes found contact
+        this.myContacts.remove(foundPosition);
+        System.out.println(contact.getName() + ", was deleted.");
+        return true;
+    }
+
     private int findContact(Contact contact){
         //determines if contact exists
         return this.myContacts.indexOf(contact);
@@ -48,6 +61,27 @@ public class MobilePhone {
            }
        }
        return -1;
+    }
+
+    //Finds contact using public method
+    public String queryContact(Contact contact){
+        //checks for record using existing contact name
+        if(findContact(contact) >= 0){
+            //gets contact info
+            return contact.getName();
+        }
+        return null;
+    }
+
+    //prints out entire contact list.
+    public void printContacts(){
+        System.out.println("Contact List");
+        for (int i = 0; i < this.myContacts.size(); i++){
+            System.out.println((i+1) + "." +
+                    //myContacts/access current index/call getter
+                    this.myContacts.get(i).getName() + " -> " +
+                    this.myContacts.get(i).getPhoneNumber());
+        }
     }
 
 
