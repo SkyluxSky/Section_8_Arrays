@@ -73,6 +73,15 @@ public class MobilePhone {
         return null;
     }
 
+    //Checks to see if name exists in the arraylist.
+    public Contact queryContact(String name){
+        int position = findContact(name);
+        if (position >= 0){
+            return this.myContacts.get(position);
+        }
+        return null;
+    }
+
     //prints out entire contact list.
     public void printContacts(){
         System.out.println("Contact List");

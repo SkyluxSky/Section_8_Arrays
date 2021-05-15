@@ -59,20 +59,6 @@ public class Main {
     }
     }
 
-    private static void addNewContact(){
-        System.out.println("Enter new contact name: ");
-        String name = scanner.nextLine();
-        System.out.println("Enter phone number: ");
-        String phone = scanner.nextLine();
-        //Call factory method - Assembles Contact -Example of Design Pattern
-        Contact newContact = Contact.createContact(name, phone);
-        if (mobilePhone.addNewContact(newContact)){
-            System.out.println("New contact added: " + name + ", phone = " + phone);
-        } else {
-            System.out.println("Cannot add, " + name + " already on file");
-        }
-    }
-
     private static void startPhone(){
         System.out.println("Starting phone...");
     }
@@ -87,5 +73,78 @@ public class Main {
                 "5 query if an existing contact exists\n" +
                 "6 - to print list of available actions.");
         System.out.println("Choose your action: ");
+    }
+
+    private static void addNewContact(){
+        System.out.println("Enter new contact name: ");
+        String name = scanner.nextLine();
+        System.out.println("Enter phone number: ");
+        String phone = scanner.nextLine();
+        //Call factory method - Assembles Contact -Example of Design Pattern
+        Contact newContact = Contact.createContact(name, phone);
+
+        if (mobilePhone.addNewContact(newContact)){
+            System.out.println("New contact added: " + name + ", phone = " + phone);
+        } else {
+            System.out.println("Cannot add, " + name + " already on file");
+        }
+    }
+
+    private static void updateContact(){
+        System.out.println("Enter existing contact name: ");
+        String name = scanner.nextLine();
+        Contact existingContactRecord = mobilePhone.queryContact(name);
+
+        //Checks to see if record is available - test
+        if (existingContactRecord == null){
+            System.out.println("Contact not found.");
+            return;
+        }
+
+        System.out.println("Enter new contact name: ");
+        String newName = scanner.nextLine();
+        System.out.println("Enter new contact phone number: ");
+        String newNumber = scanner.nextLine();
+        Contact newContact = Contact.createContact(newName, newNumber);
+
+        //Test to see if contact was changed successfully.
+        if(mobilePhone.updateContact(existingContactRecord, newContact)){
+            System.out.println("Successfully updated record");
+        } else {
+            System.out.println("Error updating record");
+        }
+    }
+
+    private static void removeContact(){
+        System.out.println("Enter existing contact name: ");
+        String name = scanner.nextLine();
+        Contact existingContactRecord = mobilePhone.queryContact(name);
+
+        //Checks to see if record is available - test
+        if (existingContactRecord == null){
+            System.out.println("Contact not found.");
+            return;
+        }
+
+        //We can wrap functionality within if statements
+        if(mobilePhone.removeContact(existingContactRecord)){
+            System.out.println("Successfully deleted");
+        } else {
+            System.out.println("Error deleting contact");
+        }
+    }
+
+    private static void queryContact(){
+        System.out.println("Enter existing contact name: ");
+        String name = scanner.nextLine();
+        Contact existingContactRecord = mobilePhone.queryContact(name);
+
+        //Checks to see if record is available - test
+        if (existingContactRecord == null){
+            System.out.println("Contact not found.");
+            return;
+        }
+
+        System.out.println("Name: " + existingContactRecord.getName() + " phone number is " + existingContactRecord.getPhoneNumber());
     }
 }
