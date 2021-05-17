@@ -22,6 +22,11 @@ public class Branch {
         return name;
     }
 
+    //Get list of customers
+    public ArrayList<Customer> getCustomers() {
+        return customers;
+    }
+
     //Creates new customer with verification...
     public boolean newCustomer(String customerName, double initialAmount){
 
@@ -67,5 +72,5 @@ public class Branch {
         //Customer not Found!!! please add!
         return null;
     }
-    
+
 }
