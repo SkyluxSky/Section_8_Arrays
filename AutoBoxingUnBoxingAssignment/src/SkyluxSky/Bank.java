@@ -95,7 +95,7 @@ public class Bank {
 
                     //Second loop for all possible transactions...
                     for (int j = 0;j < transactions.size(); j++){
-                        System.out.println("[" + (j + 1) + "] Amount" + transactions.get(j));
+                        System.out.println("[" + (j + 1) + "] Amount " + transactions.get(j));
                     }
                 }
             }

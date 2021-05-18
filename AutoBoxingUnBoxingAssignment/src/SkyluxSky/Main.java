@@ -25,6 +25,51 @@ package SkyluxSky;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        Bank bank = new Bank("CitiBank");
+        //Add Branch
+        bank.addBranch("Garden_City");
+
+
+
+        //Create three customers for Garden_City Branch
+        bank.addCustomer("Garden_City","Cameron", 50.05);
+        bank.addCustomer("Garden_City", "Alina", 23.31);
+        bank.addCustomer("Garden_City", "Nick", 1000.56);
+
+        //Add Branch
+        if (bank.addBranch("Queens")){
+            System.out.println("Queens Branch Created");
+        }
+        bank.addCustomer("Queens", "Bob", 40.00);
+
+        bank.addCustomerTransaction("Garden_City","Nick", 30.00);
+        bank.addCustomerTransaction("Garden_City","Nick", 23.12);
+        bank.addCustomerTransaction("Garden_City","Alina", 1.42);
+
+        //List Transactions
+        bank.listCustomer("Garden_City",true);
+        bank.listCustomer("Queens",true);
+
+        bank.addBranch("Melbourne");
+
+        //Error because branch does not exist:
+        if (!bank.addCustomer("Melbourne", "Brian", 5.53)){
+            System.out.println("Error Melbourne Branch Does Not Exist!");
+        }
+
+
+        if (!bank.addBranch("Queens")){
+            System.out.println("Queens Branch Already Exists...");
+        }
+
+
+        if(!bank.addCustomerTransaction("Queens", "Moot", 33)){
+            System.out.println("Customer does not exist");
+        }
+
+        if(!bank.addCustomer("Queens", "Bob", 12.00)){
+            System.out.println("Customer already exists");
+        }
+
     }
 }
