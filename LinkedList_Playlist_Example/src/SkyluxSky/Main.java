@@ -16,10 +16,7 @@ package SkyluxSky;
 // As an optional extra, provide an option to remove the current song from the playlist
 // (hint: listiterator.remove())
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.ListIterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -84,6 +81,7 @@ public class Main {
             //.toString() prints out object to a readable String...
             //Without a method like this Java will print the package name and memory address of the index of that array.
             System.out.println("Now Playing " + listIterator.next().toString());
+            printMenu();
         }
 
         while (!quit){
@@ -123,7 +121,7 @@ public class Main {
                         forward = false;
                     }
 
-                    //Prints Next Item...
+                    //Prints Previous Item...
                     if (listIterator.hasPrevious()){
                         System.out.println("Now playing " + listIterator.previous().toString());
                     } else {
@@ -133,18 +131,77 @@ public class Main {
 
                     break;
                 case 3:
+
+                    if (forward){
+                        //replay previous song
+                        if (listIterator.hasPrevious()){
+                            System.out.println("Now replaying " + listIterator.previous().toString());
+                            forward = false;
+                        } else {
+                            System.out.println("We are at the start of the list");
+                        }
+
+                    } else {
+                        //replay next song
+                        if (listIterator.hasNext()){
+                            System.out.println("Now replaying " + listIterator.next().toString());
+                            forward = true;
+                        } else {
+                            System.out.println("We have reached the end of the list");
+                        }
+                    }
+
                     break;
+
                 case 4:
-                    //printList(playList);
+                    printList(playList);
                     break;
+
                 case 5:
-                    //printMenu();
+                    printMenu();
                     break;
+
+                case 6:
+                    //remove song
+                    if (playList.size() > 0){
+                        listIterator.remove();
+                        //Guards against errors
+                        //First catch exception...
+                        if (listIterator.hasNext()){
+                            System.out.println("Now Playing " + listIterator.next());
+                        } else if (listIterator.hasPrevious()){
+                            System.out.println("Now Playing " + listIterator.previous());
+                        }
+                    }
+
+                    break;
+
                 default:
                     System.out.println("Please Enter Valid Action:");
                     break;
             }
         }
 
+    }
+
+    //Prints menu
+    private static void printMenu(){
+        System.out.println("Available actions:\npress");
+        System.out.println("0 - to quit\n" + "1 - to play next song\n" +
+                "2 - to play previous song\n" + "3 - to replay the current song\n" +
+                "4 - list songs in the playlist\n" + "5 - print available actions\n" +
+                "6 - delete current song from playlist");
+    }
+
+
+    private static void printList(LinkedList<Song> playList){
+        Iterator<Song> iterator = playList.iterator();
+        System.out.println("=============================");
+        //prints out full playlist with basic iterator
+        //traditional iterators only go forward and not backwards - unlike list iterators.
+        while (iterator.hasNext()){
+            System.out.println(iterator.next().toString());
+        }
+        System.out.println("=============================");
     }
 }
